@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#47A64A</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorTitle">#000</color>
+    <color name="colorProduct">#e12e4c</color>
+    <color name="colorSpalshStart">#6633ba43</color>
+    <color name="colorSplashEnd">#6692c755</color>
+    <color name="btnStartColor">#04743a</color>
+    <color name="btnEndColor">#06582c</color>
+    <color name="colorEditTextBg">#8845b23e</color>
+    <color name="loginBackground">#7B5496</color>
+    <color name="pink">#D39DF5</color>
+
+</resources>
