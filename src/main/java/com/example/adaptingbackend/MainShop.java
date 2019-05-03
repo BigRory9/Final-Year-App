@@ -41,6 +41,7 @@ public class MainShop extends AppCompatActivity
     LinearLayout mparent, sparent;
     TextView m_response;
     String email, user_id;
+    private DrawerLayout drawer;
 
     TextView textCartItemCount;
     public static int mCartItemCount = 0;
@@ -79,7 +80,7 @@ public class MainShop extends AppCompatActivity
         new JSONgetUserId().execute();
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 MainShop.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -95,10 +96,27 @@ public class MainShop extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_second_layout) {
+        if (id == R.id.nav_first_layout) {
+            Toast.makeText(this, "Closing Drawer",
+                    Toast.LENGTH_LONG).show();
+            drawer.closeDrawers();
+        }
+        else if (id == R.id.nav_view_orders) {
+            Toast.makeText(this, "Attempting to view your Orders....",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, ViewOrders.class);
+            startActivity(i);
+        }else if (id == R.id.nav_second_layout) {
             Toast.makeText(this, "Attempting to view your Tickets....",
                     Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, ViewTickets.class);
+            startActivity(i);
+        } else if (id == R.id.logout) {
+            Toast.makeText(this, "Logging out now  user "+email, Toast.LENGTH_LONG).show();
+            SharedPrefManager.saveEmail("",this);
+            SharedPrefManager.saveOrderID("",this);
+            SharedPrefManager.saveUserID("",this);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
 
@@ -107,10 +125,11 @@ public class MainShop extends AppCompatActivity
     }
 
     public void startUp() {
+        String imageName = "";
         for (int i = 0; i < drinkList.size(); i++) {
             View myview = layoutInflater.inflate(R.layout.myrow, null, false);
 
-            Toast.makeText(this, "Attempting to view your Tickets...."+user_id,
+            Toast.makeText(this, "Attempting to view your Tickets...." + user_id,
                     Toast.LENGTH_LONG).show();
             SharedPrefManager.saveUserID(user_id, this);
 
@@ -119,8 +138,11 @@ public class MainShop extends AppCompatActivity
             Product product = drinkList.get(i);
 
 
-//            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
-//            imageView.setImageResource(list.get(i).));
+            int res = getResources().getIdentifier(product.get_name().toLowerCase(), "drawable", this.getPackageName());
+//            imageview = (ImageView) findViewById(R.id.imageView);
+//            imageview.setImageResource(res);
+            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
+            imageView.setImageResource(res);
 //
             TextView textView = (TextView) myview.findViewById(R.id.name);
             textView.setText(drinkList.get(i).get_name());
@@ -137,10 +159,13 @@ public class MainShop extends AppCompatActivity
         for (int i = 0; i < foodList.size(); i++) {
             View secondView = layoutInflater.inflate(R.layout.myrow, null, false);
 
-
+            Product product = foodList.get(i);
             sparent.addView(secondView);
-            //            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
-//            imageView.setImageResource(list.get(i).));
+            String name = product.get_name();
+            name = name.replace(" ", "");
+            int res = getResources().getIdentifier(name.toLowerCase(), "drawable", this.getPackageName());
+            ImageView imageView = (ImageView) secondView.findViewById(R.id.image);
+            imageView.setImageResource(res);
 //
             TextView textView = (TextView) secondView.findViewById(R.id.name);
             textView.setText(foodList.get(i).get_name());
@@ -278,11 +303,11 @@ public class MainShop extends AppCompatActivity
                 while (count < jsonArray.length()) {
                     JSONObject JO = jsonArray.getJSONObject(count);
                     user_id = JO.getString("id");
-                    Toast.makeText(this,"Your ID "+user_id,
+                    Toast.makeText(this, "Your ID " + user_id,
                             Toast.LENGTH_SHORT).show();
 
                     //
-                           count++;
+                    count++;
                 }
                 //     startUp();
                 return null;

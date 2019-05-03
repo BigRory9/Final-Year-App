@@ -1,10 +1,12 @@
 package com.example.adaptingbackend;
 
 public class Order {
+    private String order_id;
     private String ProductName;
     private String Quantity;
     private String Price;
     private String product_id;
+    private String productQuantity;
 
     public Order(){
 
@@ -16,6 +18,28 @@ public class Order {
         Price = price;
         this.product_id = product_id;
 
+    }
+
+    public Order(String order_id,String product_id,String productQuantity){
+        this.order_id=order_id;
+        this.product_id=product_id;
+        this.productQuantity=productQuantity;
+    }
+
+    public String getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
+    }
+
+    public String getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity = productQuantity;
     }
 
     public String getProductName() {

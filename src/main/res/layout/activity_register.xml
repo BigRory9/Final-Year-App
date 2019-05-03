@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/spalash_gradient_bg"
+        android:background="@color/pink"
         android:orientation="vertical"
 
         >
@@ -21,12 +21,12 @@
             android:layout_height="160dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:background="@drawable/organic_logo" />
+            android:background="@drawable/logo_2" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hefty Food Co"
+            android:text="Gigz Eaze"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="28sp"
@@ -45,8 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorEditTextBg"
                 android:hint="ENTER USERNAME"
+                android:background="@color/loginBackground"
+                android:textColorHint="#FFF"
                 android:paddingLeft="20dp"
                 android:textColor="#FFF" />
 
@@ -55,8 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorEditTextBg"
+                android:background="@color/loginBackground"
                 android:hint="ENTER EMAIL"
+                android:textColorHint="#FFF"
                 android:paddingLeft="20dp"
                 android:textColor="#FFF" />
 
@@ -65,8 +67,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorEditTextBg"
                 android:hint="ENTER PASSWORD"
+                android:background="@color/loginBackground"
+                android:textColorHint="#FFF"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
                 android:textColor="#FFF" />
@@ -76,8 +79,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/login_button"
+                android:background="@color/loginBackground"
+
                 android:text="User Register here"
+
                 android:onClick="onReg"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />

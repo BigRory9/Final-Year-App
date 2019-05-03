@@ -10,15 +10,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +28,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
@@ -42,6 +47,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
     LayoutInflater layoutInflater;
     RecyclerView recyclerView;
     String id;
+    private DrawerLayout drawer;
 
 
     @Override
@@ -54,6 +60,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
         mparent = findViewById(R.id.mparent);
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -94,13 +101,79 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
         recyclerView.setAdapter(adapter);
     }
 
+    public void downloadPDF(View view) {
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //code to get the file
+                String str_FilePathInDevice = "/sdcard/" + "/"
+                        + "RestoreFolderName" + "/" + "filname.extention";
+                try {
+//                File file = new File(str_FilePathInDevice);
+                    //
+//
+//                String str_Path = file.getPath().replace(file.getName(), "");
+//                File filedir = new File(str_Path);
+
+//                try {
+//                    filedir.mkdirs();
+//                } catch (Exception ex1) {
+//                }
+                    AWSCredentials creden = new BasicAWSCredentials("AKIAI5BANVNXM3EHHWMQ",
+                            "vVsj1Kd+iQ0LKyOgSuS5PVM8vJ00fdGMll1jCc6r");
+                    AmazonS3Client s3Client = new AmazonS3Client(creden);
+                    S3Object object = s3Client.getObject(new GetObjectRequest(
+                            "tickets-images-fare", "Image Number 161"));
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(
+                            object.getObjectContent()));
+                    Writer writer = null;
+
+//                writer = new OutputStreamWriter(new FileOutputStream(file));
+
+
+                    while (true) {
+                        String line = reader.readLine();
+                        if (line == null)
+                            break;
+                        writer.write(line + "\n");
+                    }
+                    writer.flush();
+                    writer.close();
+                    reader.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
+    }
+
+
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_second_layout) {
-            Toast.makeText(this, "Attempting to view your Tickets....",
+        if (id == R.id.nav_first_layout) {
+            Toast.makeText(this, "Purchase food and drinks",
                     Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, ViewTickets.class);
+            Intent i = new Intent(this, MainShop.class);
+            startActivity(i);
+        } else if (id == R.id.nav_second_layout) {
+            Toast.makeText(this, "Closing Drawer",
+                    Toast.LENGTH_LONG).show();
+            drawer.closeDrawers();
+        } else if (id == R.id.logout) {
+            String email = SharedPrefManager.getEmail(this);
+            Toast.makeText(this, "Logging out now  user " + email, Toast.LENGTH_LONG).show();
+            SharedPrefManager.saveEmail("", this);
+            SharedPrefManager.saveOrderID("", this);
+            SharedPrefManager.saveUserID("", this);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
 
@@ -127,7 +200,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
                 double price = Double.parseDouble(value);
                 date = date.replace("\"", "");
-                Ticket ticket = new Ticket(name, arena, date, price, time);
+                Ticket ticket = new Ticket(id, name, arena, date, price, time);
 //                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'");
 //                Date d = format.parse(date);
 //                if(date.contains("")) {
@@ -157,7 +230,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://10.0.2.2//viewUsersTickets.php?id="+id;
+            JSON_URL = "http://10.0.2.2//viewUsersTickets.php?id=" + id;
         }
 
         @Override
@@ -196,4 +269,6 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
         }
     }
+
+
 }

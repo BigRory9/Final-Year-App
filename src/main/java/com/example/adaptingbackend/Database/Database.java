@@ -16,7 +16,7 @@ import java.util.Locale;
 //update it where it creates a cart while started up
 //SQLiteAssetHelper
 public class Database extends SQLiteAssetHelper {
-    private static final String DB_NAME = "exitDB.db";
+    private static final String DB_NAME = "cart.db";
     public static final String ID = "ID";
     public static final String ProductName = "ProductName";
     public static final String Quantity = "Quantity";
