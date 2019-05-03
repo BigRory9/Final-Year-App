@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="395dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:padding="4dp"
+                android:src="@drawable/logo_2" />
+
+            <TextView
+                android:id="@+id/product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/imageView"
+                android:text="Products Purchased"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/imageView"
+                android:text="Products Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            <!--<TextView-->
+                <!--android:id="@+id/quantity"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/productName"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_toRightOf="@id/imageView"-->
+                <!--android:text="Quantity"-->
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/productName"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/imageView"
+                android:text="Price "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+
+            <Button
+                android:id="@+id/openPDF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/date"
+                android:layout_alignBottom="@+id/price"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="25dp"
+                android:background="@color/colorPrimary"
+                android:onClick="downloadPDF"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Collect Order"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
