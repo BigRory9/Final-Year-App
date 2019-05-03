@@ -12,14 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adaptingbackend.Database.Database;
 import com.example.adaptingbackend.R;
 import com.google.zxing.qrcode.encoder.QRCode;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static com.example.adaptingbackend.MainShop.mCartItemCount;
-import static com.example.adaptingbackend.MainShop.m_cart;
 
 
 public class ViewCart extends AppCompatActivity {
@@ -31,8 +32,8 @@ public class ViewCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_cart);
 
-        Cart cart = m_cart;
-        if (m_cart.getProducts().size() < 1) {
+        List<Order> m_cart = new Database(this).getCarts();
+        if (m_cart.size() < 1) {
             Toast toast = Toast.makeText(getApplicationContext(), "ERROR: Cart is Empty", Toast.LENGTH_SHORT);
             toast.show();
             Intent intent = new Intent(this, MainShop.class);
@@ -41,48 +42,52 @@ public class ViewCart extends AppCompatActivity {
         }
         mparent = findViewById(R.id.mparent);
         layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        Set<Product> products = cart.getProducts();
+//        Set<Product> products = cart.getProducts();
 
         TextView welcome = (TextView) findViewById(R.id.welcome);
-        SharedPrefManager.getUsername(this);
-        String name = SharedPrefManager.getUsername(this);
+        SharedPrefManager.getEmail(this);
+        String name = SharedPrefManager.getEmail(this);
         welcome.setText("Welcome "+name+" this is your cart");
 
-        Iterator iterator = products.iterator();
+        Iterator iterator = m_cart.iterator();
         while (iterator.hasNext()) {
-            Product product = (Product) iterator.next();
+            Order order = (Order) iterator.next();
             View myview = layoutInflater.inflate(R.layout.cartrow, null, false);
             mparent.addView(myview);
             //set the views details to the products details
 
 
 
-            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
-            imageView.setImageResource(product.getImageName());
+//            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
+//            imageView.setImageResource(product.getImageName());
 
             TextView textView = (TextView) myview.findViewById(R.id.name);
-            textView.setText(product.get_name());
-
+            textView.setText(order.getProductName());
+//
             TextView priceView = (TextView) myview.findViewById(R.id.price);
-            priceView.setText(Double.toString(product.get_value()));
-
-            TextView descView = (TextView) myview.findViewById(R.id.desc);
-            descView.setText(product.getDescription());
-
+            priceView.setText(order.getPrice());
+//
+//            TextView descView = (TextView) myview.findViewById(R.id.desc);
+//            descView.setText(product.getDescription());
+//
             TextView quaView = (TextView) myview.findViewById(R.id.qty);
-            quaView.setText(Integer.toString(cart.getQuantity(product)));
-
+            quaView.setText(order.getQuantity());
+////
             TextView valueView = (TextView) findViewById(R.id.response);
-            String price =String.format("%.2f", cart.getValue());
-            valueView.setText("Total Cart Value = $ "+price);
-
+            String price = new Database(this).getPrice();
+            valueView.setText("Total Cart Value = € "+price);
+//
             Button btn = (Button) myview.findViewById(R.id.btnRemove);
             ImageButton btnAdd = (ImageButton) myview.findViewById(R.id.btnAdd);
             ImageButton btnRemove = (ImageButton) myview.findViewById(R.id.btnRemoveOne);
 
-            btn.setTag(product);
-            btnAdd.setTag(product);
-            btnRemove.setTag(product);
+            btn.setTag(order.getProductName());
+            btnAdd.setTag(order.getProductName());
+            btnRemove.setTag(order.getProductName());
+
+            btn.setTag(order.getProductName());
+            btnAdd.setTag(order.getProductName());
+            btnRemove.setTag(order.getProductName());
 
 
         }
@@ -91,11 +96,11 @@ public class ViewCart extends AppCompatActivity {
 
     public void deleteProdcut(View v) {
         Button button = v.findViewById(R.id.btnRemove);
-        Product product = (Product) button.getTag();
+        String product = (String) button.getTag();
 
 
-        m_cart.removeFromCart(product);
-        Toast toast = Toast.makeText(getApplicationContext(), "A " + product.get_name() + " been removed from your cart", Toast.LENGTH_SHORT);
+        new Database(this).deleteProduct(product);
+        Toast toast = Toast.makeText(getApplicationContext(), "A " + product + " been removed from your cart", Toast.LENGTH_SHORT);
         toast.show();
         Intent intent = new Intent(this, ViewCart.class);
         startActivity(intent);
@@ -103,11 +108,10 @@ public class ViewCart extends AppCompatActivity {
 
     public void deleteOneProduct(View v) {
         ImageButton button = v.findViewById(R.id.btnRemoveOne);
-        Product product = (Product) button.getTag();
-//
-        m_cart.removeOneFromCart(product);
-        mCartItemCount = mCartItemCount - 1;
-        Toast toast = Toast.makeText(getApplicationContext(), "A " + product.get_name() + " been removed from your cart", Toast.LENGTH_SHORT);
+        String product = (String) button.getTag();
+
+        new Database(this).minusOneToProduct(product);
+        Toast toast = Toast.makeText(getApplicationContext(), "A " + product + " been taken from your cart", Toast.LENGTH_SHORT);
         toast.show();
         Intent intent = new Intent(this, ViewCart.class);
         startActivity(intent);
@@ -115,11 +119,10 @@ public class ViewCart extends AppCompatActivity {
 
     public void addOneProduct(View v) {
         ImageButton button = v.findViewById(R.id.btnAdd);
-        Product product = (Product) button.getTag();
-//
-        m_cart.addToCart(product);
-        mCartItemCount = mCartItemCount + 1;
-        Toast toast = Toast.makeText(getApplicationContext(), "A " + product.get_name() + " been added to your cart", Toast.LENGTH_SHORT);
+        String product = (String) button.getTag();
+
+        new Database(this).addOneToProduct(product);
+        Toast toast = Toast.makeText(getApplicationContext(), "A " + product + " been added to your cart", Toast.LENGTH_SHORT);
         toast.show();
         Intent intent = new Intent(this, ViewCart.class);
         startActivity(intent);

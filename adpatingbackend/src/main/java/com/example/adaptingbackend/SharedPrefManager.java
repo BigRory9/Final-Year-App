@@ -12,29 +12,42 @@ public class SharedPrefManager {
 
     }
 
-    public static boolean saveUsername(String name, Context context) {
+    public static boolean saveEmail(String name, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.KEY_USERNAME, name);
+        prefsEditor.putString(Constants.KEY_EMAIL, name);
         prefsEditor.apply();
         return true;
     }
 
-    public static String getUsername(Context context) {
+    public static String getEmail(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(Constants.KEY_USERNAME, null);
+        return prefs.getString(Constants.KEY_EMAIL, null);
     }
-    public static boolean saveID(String id, Context context) {
+    public static boolean saveOrderID(String id, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.KEY_ID, id);
+        prefsEditor.putString(Constants.ORDER_ID, id);
         prefsEditor.apply();
         return true;
     }
 
-    public static String getID(Context context) {
+    public static String getOrderID(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(Constants.KEY_ID, null);
+        return prefs.getString(Constants.ORDER_ID, null);
+    }
+
+    public static boolean saveUserID(String id, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.USER_ID, id);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getUserID(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.USER_ID, null);
     }
 
 

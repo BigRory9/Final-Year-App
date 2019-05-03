@@ -1,73 +1,76 @@
 package com.example.adaptingbackend;
 
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
-import static com.example.adaptingbackend.MainShop.mCartItemCount;
-
 public class Order {
+    private String order_id;
+    private String ProductName;
+    private String Quantity;
+    private String Price;
+    private String product_id;
+    private String productQuantity;
 
-    Map<Product,Integer> m_order;
-    double m_value =0;
-
-    Order(){
-        m_order= new LinkedHashMap<>();
-    }
-
-    void addToOrder(Product product){
-        if(m_order.containsKey(product))
-            m_order.put(product,m_order.get(product) + 1);
-        else
-            m_order.put(product,1);
-
-        m_value += product.get_value();
-    }
-
-    void removeFromCart(Product product) {
-        mCartItemCount= mCartItemCount-m_order.get(product).intValue();
-        m_value -= product.get_value()*m_order.get(product).intValue();
-        m_order.remove(product);
+    public Order(){
 
     }
 
-    void removeOneFromCart(Product product){
-        if(m_order.get(product)!=1) {
-            m_order.put(product, m_order.get(product) - 1);
-        }
-        else {
-            m_order.remove(product);
-        }
-        m_value -= product.get_value();
+    public Order( String productName, String quantity, String price,String product_id) {
+        ProductName = productName;
+        Quantity = quantity;
+        Price = price;
+        this.product_id = product_id;
+
     }
 
-    int getQuantity(Product product)
-    {
-        return m_order.get(product);
+    public Order(String order_id,String product_id,String productQuantity){
+        this.order_id=order_id;
+        this.product_id=product_id;
+        this.productQuantity=productQuantity;
     }
 
-    Set getProducts()
-    {
-        return m_order.keySet();
+    public String getOrder_id() {
+        return order_id;
     }
 
-
-    void empty(){
-        m_order.clear();
-        m_value=0;
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
     }
 
-    double getValue()
-    {
-        return m_value;
+    public String getProductQuantity() {
+        return productQuantity;
     }
 
-    int getSize()
-    {
-        return m_order.size();
+    public void setProductQuantity(String productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
+    }
+
+    public String getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        Quantity = quantity;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        Price = price;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 }
-
-
-

@@ -10,4 +10,7 @@
     <color name="btnStartColor">#04743a</color>
     <color name="btnEndColor">#06582c</color>
     <color name="colorEditTextBg">#8845b23e</color>
+    <color name="loginBackground">#7B5496</color>
+    <color name="pink">#D39DF5</color>
+
 </resources>

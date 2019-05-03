@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.adaptingbackend.Database.Database;
 import com.example.adaptingbackend.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -40,15 +41,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import static com.example.adaptingbackend.MainShop.m_cart;
 
 public class QrCode extends AppCompatActivity {
 
     private ImageView imageView;
     String value = "Order Information\n";
-    String orderID, name;
+    String orderID = "87", name;
 
     private static final String TAG = "MainActivity";
 
@@ -62,45 +63,38 @@ public class QrCode extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         imageView = findViewById(R.id.imageView);
-        SharedPrefManager.getUsername(this);
-        name = SharedPrefManager.getUsername(this);
-        new JSONBackgroundWorker().execute();
-
-
-    }
-
-    public void start() {
-
-        Cart cart = m_cart;
-        Set<Product> products = cart.getProducts();
-        Iterator iterator = products.iterator();
+        List<Order> m_cart = new Database(this).getCarts();
+//        Set<Product> products = cart.getProducts();
+        Iterator iterator = m_cart.iterator();
 
 
         while (iterator.hasNext()) {
-            Product product = (Product) iterator.next();
+            Order order = (Order) iterator.next();
 //            Toast.makeText(this,
 //                    m_order.getSize(), Toast.LENGTH_LONG).show();
 
 
             // makes it only add the product once
-            if (!value.contains(product.get_name())) {
+            if (!value.contains(order.getProductName())) {
                 //make a call to backgroundWorker which will have to take
                 //User_id,and the ids of the products
                 BackgroundWorker backgroundWorker = new BackgroundWorker(this);
                 String type = "order";
                 // I need the product Ids and product quantity and orderID
 
-                Toast toast = Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast "+name, Toast.LENGTH_SHORT); toast.show();
-
-                backgroundWorker.execute(type, product.getId(), String.valueOf(m_cart.getQuantity(product)),orderID);
-                value = value + "\nProduct Name : " + product.get_name() + " \nAmount = " + m_cart.getQuantity(product) + "\n";
+                Toast toast = Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast " + order.getProduct_id(), Toast.LENGTH_SHORT);
+                toast.show();
+                //get Product Id + product quantity
+               // order.getProductName();
+                backgroundWorker.execute(type, order.getProduct_id(), order.getQuantity(),SharedPrefManager.getOrderID(this));
+                value = value + "\nProduct Name : " + order.getProductName() + " \nAmount = " + order.getQuantity() + "\n";
             }
 
         }
 
 
-        m_cart.empty();
-
+        new Database(this).clearCart();
+//
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
@@ -116,40 +110,8 @@ public class QrCode extends AppCompatActivity {
             init();
         }
 
+
     }
-
-    public ArrayList<Product> parseJSON(String JSON_STRING) {
-
-
-        try {
-
-            JSONObject jsonObject = new JSONObject(JSON_STRING);
-            JSONArray jsonArray = jsonObject.getJSONArray("server_response");
-            int count = 0;
-            String id;
-            String food;
-            boolean type = true;
-
-            while (count < jsonArray.length()) {
-                JSONObject JO = jsonArray.getJSONObject(count);
-
-                id = JO.getString("id");
-                orderID = id;
-
-
-                Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast " + orderID, Toast.LENGTH_SHORT).show();
-                
-                count++;
-
-            }
-            start();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-//        Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast " + orderID, Toast.LENGTH_SHORT).show();
-        return null;
-    }
-
 
     private void init() {
         Button btnMap = (Button) findViewById(R.id.btnMap);
@@ -188,53 +150,4 @@ public class QrCode extends AppCompatActivity {
         toast.show();
         startActivity(new Intent(this, MainShop.class));
     }
-
-    public class JSONBackgroundWorker extends AsyncTask<Void, Void, String> {
-        String JSON_URL;
-        String JSON_STRING;
-
-        @Override
-        protected void onPreExecute() {
-            JSON_URL = "http://10.0.2.2/createOrder.php/?email="+name;
-
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                URL url = new URL(JSON_URL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("GET");
-                InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((JSON_STRING = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(JSON_STRING + "\n");
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-                JSON_STRING = stringBuilder.toString().trim();
-                return stringBuilder.toString().trim();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return " ERROR";
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-//            Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast" + result, Toast.LENGTH_SHORT).show();
-            parseJSON(result);
-
-        }
-    }
-
-
 }

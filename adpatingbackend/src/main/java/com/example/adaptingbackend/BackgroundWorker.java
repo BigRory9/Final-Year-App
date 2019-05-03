@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.adaptingbackend.Database.Database;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,8 +15,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -34,10 +38,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         String login_url = "http://10.0.2.2/login.php";
         String register_url = "http://10.0.2.2/register.php";
         String order_url = "http://10.0.2.2/addOrder.php";
-        String tansaction_url = "http://10.0.2.2/paypage/charge.php";
+        String tansaction_url = "http://10.0.2.2/paypage_orders/charge.php";
         if(type.equals("login")){
             try {
-                String username = params[1];
+                String email = params[1];
                 String password = params[2];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -46,8 +50,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-
-                String post_data = URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"
+//                String newPassword = AESCrypt.encrypt(password);
+                String post_data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"
                         +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
 
 
@@ -71,6 +75,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -163,6 +169,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         if(type.equals("SEND TOKEN")){
             try {
                 String token_id = params[1];
+               String order_id = params[2];
+               String description = params[3];
+               String user_id = params[4];
 
                 URL url = new URL(tansaction_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -172,8 +181,11 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
+                String number= new Database(context).getPrice();
+                String price = String.valueOf(Integer.valueOf(number)*100);
                 String post_data = URLEncoder.encode("first","UTF-8")+"="+URLEncoder.encode("Drogba","UTF-8")+"&"+URLEncoder.encode("last","UTF-8")+"="+URLEncoder.encode("Liam","UTF-8")+"&"+ URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode("Liamharford@live.ie","UTF-8")+"&"
-                        +URLEncoder.encode("stripeToken","UTF-8")+"="+URLEncoder.encode(token_id,"UTF-8");
+                        +URLEncoder.encode("stripeToken","UTF-8")+"="+URLEncoder.encode(token_id,"UTF-8")+"&"+URLEncoder.encode("order_id","UTF-8")+"="+URLEncoder.encode(order_id,"UTF-8")+"&"+URLEncoder.encode("price","UTF-8")+"="+URLEncoder.encode(price,"UTF-8")
+                        +"&"+URLEncoder.encode("description","UTF-8")+"="+URLEncoder.encode(description,"UTF-8")+"&"+URLEncoder.encode("user_id","UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -200,6 +212,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             }
 
         }
+
         return null;
     }
 
@@ -228,7 +241,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             context.startActivity(i);
 
 
+
         }
+
 //        else
 //        {
 //            alertDialog.setMessage(result);

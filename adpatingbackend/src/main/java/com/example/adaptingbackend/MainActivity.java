@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.adaptingbackend.Database.Database;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText UsernameEt, PasswordEt;
@@ -20,20 +22,21 @@ public class MainActivity extends AppCompatActivity {
 
         UsernameEt = (EditText) findViewById(R.id.username);
         PasswordEt = (EditText) findViewById(R.id.password);
+        new Database(this).clearCart();
     }
 
     public void onLogin(View view) {
-        String username = UsernameEt.getText().toString();
+        String email = UsernameEt.getText().toString();
         String password = PasswordEt.getText().toString();
         String type = "login";
 
-        SharedPrefManager.saveUsername(username, this);
+        SharedPrefManager.saveEmail(email, this);
         //save ID
         Toast toast = Toast.makeText(getApplicationContext(),
-                SharedPrefManager.getUsername(this), Toast.LENGTH_SHORT);
+                SharedPrefManager.getEmail(this), Toast.LENGTH_SHORT);
         toast.show();
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, username, password);
+        backgroundWorker.execute(type, email, password);
 
 
     }

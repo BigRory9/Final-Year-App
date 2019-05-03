@@ -41,7 +41,7 @@
         </LinearLayout>
 
             <TextView
-            android:text="Total Cart Value = $ 0 "
+            android:text="Total Cart Value = € 0 "
             android:id="@+id/response"
             android:gravity="center"
             android:textSize="25sp"

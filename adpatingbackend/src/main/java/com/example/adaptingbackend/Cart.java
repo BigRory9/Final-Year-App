@@ -67,4 +67,9 @@ public class Cart {
     {
         return m_cart.size();
     }
+
+    public Map<Product, Integer> getCart(){
+        return m_cart;
+    }
+
 }

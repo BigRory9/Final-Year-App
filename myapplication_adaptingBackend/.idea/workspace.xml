@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3b2517a6-a5b5-43d6-9e28-6c1f60b5125a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/BackgroundWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/BackgroundWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/CardActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/CardActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/MainShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/MainShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/QrCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/QrCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/SharedPrefManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/SharedPrefManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/ViewCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/java/com/example/adaptingbackend/ViewCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/activity_shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/activity_shop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/activity_view_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/activity_view_cart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/cartrow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/res/layout/cartrow.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../adpatingbackend/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../adpatingbackend/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/androidTest/java/com/example/myapplication/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/BackgroundWorker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/CardActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/Cart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/MainShop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/MapActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/QrCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/Register.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/SharedPrefManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/java/com/example/myapplication/ViewCart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/button_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/button_hover.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/edit_text_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/food_tweeks_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/image_placeholder.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/login_button.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/mat_login_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/organic_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable-v24/spalash_gradient_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/badge_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/burger.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/button_favourite.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/chips.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/club.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/ic_info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/ic_shopping_cart.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/icon_hover.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/icon_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/mexican.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/qty_decrease.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/qty_increase.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/salad.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/soup.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/sweet.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/thebanner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/drawable/wings.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_card_activity.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_maps.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_qr_code.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_shop.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/activity_view_cart.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/cartrow.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/content_qr_code.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/custom_action_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/myrow.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/layout/toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/menu/menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../myapplication/src/test/java/com/example/myapplication/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-346556101">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="iml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IDEA_MODULE" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/myapplication_adaptingBackend.iml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>AccessibilityLintAndroid</id>
+          </State>
+          <State>
+            <id>Android</id>
+          </State>
+          <State>
+            <id>Application SizePerformanceLintAndroid</id>
+          </State>
+          <State>
+            <id>Bidirectional TextInternationalizationLintAndroid</id>
+          </State>
+          <State>
+            <id>Chrome OSCorrectnessLintAndroid</id>
+          </State>
+          <State>
+            <id>ComplianceLintAndroid</id>
+          </State>
+          <State>
+            <id>CorrectnessLintAndroid</id>
+          </State>
+          <State>
+            <id>IconsUsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>InternationalizationLintAndroid</id>
+          </State>
+          <State>
+            <id>InteroperabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>JNIAndroid</id>
+          </State>
+          <State>
+            <id>Kotlin Android</id>
+          </State>
+          <State>
+            <id>Kotlin InteroperabilityInteroperabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>LintAndroid</id>
+          </State>
+          <State>
+            <id>LintLintAndroid</id>
+          </State>
+          <State>
+            <id>MessagesCorrectnessLintAndroid</id>
+          </State>
+          <State>
+            <id>PerformanceLintAndroid</id>
+          </State>
+          <State>
+            <id>RoomAndroid</id>
+          </State>
+          <State>
+            <id>SecurityLintAndroid</id>
+          </State>
+          <State>
+            <id>TypographyUsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>UsabilityLintAndroid</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AndroidLintObsoleteSdkInt</id>
+          </State>
+          <State>
+            <id>AndroidLintUseOfBundledGooglePlayServices</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="myapplication_adaptingBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myapplication_adaptingBackend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="myapplication_adaptingBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="myapplication_adaptingBackend" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b2517a6-a5b5-43d6-9e28-6c1f60b5125a" name="Default Changelist" comment="" />
+      <created>1553267652745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553267652745</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info id="Designer" order="1" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.32980832" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Structure" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="2" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.idea/myapplication_adaptingBackend.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
