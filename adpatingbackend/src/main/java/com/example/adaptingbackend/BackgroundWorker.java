@@ -130,6 +130,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String id = params[1];
                 String amount = params[2];
                 String orderID = params[3];
+                String pin =params[4];
 
 //                User user = new User(username,email,password);
                 //in oncreate
@@ -141,7 +142,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(amount, "UTF-8") + "&" + URLEncoder.encode("order_id", "UTF-8") + "=" + URLEncoder.encode(orderID, "UTF-8");
+                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(amount, "UTF-8") + "&" + URLEncoder.encode("order_id", "UTF-8") + "=" + URLEncoder.encode(orderID, "UTF-8")+"&" +  URLEncoder.encode("pin", "UTF-8") + "=" + URLEncoder.encode(pin, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -166,6 +167,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         if(type.equals("SEND TOKEN")){
             try {
                 String token_id = params[1];
@@ -257,4 +259,6 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
+
 }

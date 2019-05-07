@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/loginBackground">
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="5dp" />-->
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pink"
+        android:text="Enter the code you where emailed to collect your drink"/>
+
+    <EditText
+        android:id="@+id/editTextone"
+        android:layout_width="40sp"
+        android:layout_height="42sp"
+        android:layout_below="@id/text"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:textColor="@color/pink"
+
+        />
+
+    <EditText
+        android:id="@+id/editTexttwo"
+        android:layout_width="40sp"
+        android:layout_height="42sp"
+        android:layout_below="@id/text"
+        android:layout_marginLeft="-14dp"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/editTextone"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:textColor="@color/pink" />
+
+    <EditText
+        android:id="@+id/editTextthree"
+        android:layout_width="40sp"
+        android:layout_height="42sp"
+        android:layout_below="@id/text"
+        android:layout_toRightOf="@id/editTexttwo"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:textColor="@color/pink" />
+
+    <EditText
+        android:id="@+id/editTextfour"
+        android:layout_width="40sp"
+        android:layout_height="42sp"
+        android:layout_below="@id/text"
+        android:layout_toRightOf="@id/editTextthree"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:textColor="@color/pink" />
+
+    <Button
+        android:id="@+id/dialogButtonOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_marginTop="2dp"
+
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/editTextfour"
+        android:text=" Enter "
+
+        />
+
+</RelativeLayout>

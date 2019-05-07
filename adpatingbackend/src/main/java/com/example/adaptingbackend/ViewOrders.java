@@ -1,5 +1,7 @@
 package com.example.adaptingbackend;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +18,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -128,6 +135,7 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
         return false;
     }
 
+
     public ArrayList<ReadOrdersFromDB> parseJSON(String JSON_STRING) {
 
 
@@ -135,7 +143,7 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
             JSONObject jsonObject = new JSONObject(JSON_STRING);
             JSONArray jsonArray = jsonObject.getJSONArray("server_response");
             int count = 0;
-            String id, product_id, productQuantity;
+            String id, product_id, productQuantity, code;
             boolean type = true;
             while (count < jsonArray.length()) {
                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -144,10 +152,12 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
                 productQuantity = JO.getString("productQuantity");
 
+                code= JO.getString("code");
+
                 ArrayList<String> prod = new ArrayList<String>();
 
                 ArrayList<String> quantity = new ArrayList<String>();
-                ReadOrdersFromDB order = new ReadOrdersFromDB(id, prod, quantity);
+                ReadOrdersFromDB order = new ReadOrdersFromDB(id, prod, quantity,code);
                 boolean found = false;
                 int num = 0;
                 for (int i = 0; i < orderList.size(); i++) {
@@ -321,6 +331,8 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
         }
     }
+
+
 
 }
 

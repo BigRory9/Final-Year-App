@@ -23,6 +23,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.encoder.QRCode;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
@@ -66,6 +67,8 @@ public class QrCode extends AppCompatActivity {
         List<Order> m_cart = new Database(this).getCarts();
 //        Set<Product> products = cart.getProducts();
         Iterator iterator = m_cart.iterator();
+        String pin = generatePIN();
+        System.out.print(pin);
 
 
         while (iterator.hasNext()) {
@@ -85,12 +88,15 @@ public class QrCode extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast " + order.getProduct_id(), Toast.LENGTH_SHORT);
                 toast.show();
                 //get Product Id + product quantity
-               // order.getProductName();
-                backgroundWorker.execute(type, order.getProduct_id(), order.getQuantity(),SharedPrefManager.getOrderID(this));
+                // order.getProductName();
+
+
+                backgroundWorker.execute(type, order.getProduct_id(), order.getQuantity(), SharedPrefManager.getOrderID(this), pin);
                 value = value + "\nProduct Name : " + order.getProductName() + " \nAmount = " + order.getQuantity() + "\n";
             }
 
         }
+        new Connection().execute(pin);
 
 
         new Database(this).clearCart();
@@ -150,4 +156,45 @@ public class QrCode extends AppCompatActivity {
         toast.show();
         startActivity(new Intent(this, MainShop.class));
     }
+
+    public String generatePIN() {
+
+        //generate a 4 digit integer 1000 <10000
+        int randomPIN = (int) (Math.random() * 9000) + 1000;
+
+        return Integer.toString(randomPIN);
+    }
+
+    private class Connection extends AsyncTask {
+
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+                String pin =objects[0].toString();
+                Mail m = new Mail("rjharford@gmail.com", "dadadada1");
+
+                String[] toArr = {"roryharford@live.ie"};
+                m.setTo(toArr);
+                m.setFrom("rjharford@gmail.com");
+                m.setSubject("This is an email sent by GigzEaze to collect your items");
+                m.setBody("The code you will need to collect your order is "+pin);
+
+                try {
+//                    m.addAttachment("/sdcard/filelocation");
+
+
+                    if (m.send()) {
+                        //  Toast.makeText(MainActivity.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Toast.makeText(MainActivity.this, "Email was not sent.", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
+                    Log.e("MailApp", "Could not send email", e);
+                }
+                return null;
+            }
+        }
+
 }

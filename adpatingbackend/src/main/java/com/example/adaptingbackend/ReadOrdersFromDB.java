@@ -8,11 +8,13 @@ public class ReadOrdersFromDB {
     private int Price;
     private ArrayList<String>  product_id;
     private ArrayList<String>  productQuantity;
+    private String code;
 
-    public ReadOrdersFromDB(String order_id,ArrayList<String>  product_id,ArrayList<String>  productQuantity){
+    public ReadOrdersFromDB(String order_id,ArrayList<String>  product_id,ArrayList<String>  productQuantity,String code){
         this.order_id=order_id;
         this.product_id=product_id;
         this.productQuantity=productQuantity;
+        this.code=code;
     }
 
     public String getOrder_id() {
@@ -21,6 +23,14 @@ public class ReadOrdersFromDB {
 
     public void setOrder_id(String order_id) {
         this.order_id = order_id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public int getPrice() {
