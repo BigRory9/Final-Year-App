@@ -1,6 +1,7 @@
 package com.example.adaptingbackend;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -19,7 +20,9 @@ import android.widget.Toast;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
 import com.amazonaws.services.s3.model.S3Object;
 
 import org.json.JSONArray;
@@ -34,6 +37,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,6 +46,8 @@ import java.util.Date;
 
 public class ViewTickets extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final String accessKey = "AKIAJVL5I336SYABBB4A";
+    private final String secretKey = "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";
     LinearLayout mparent;
     ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
     LayoutInflater layoutInflater;
@@ -154,6 +160,21 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
     }
 
+    public void getPDF(View view) {
+        try {
+            ResponseHeaderOverrides override = new ResponseHeaderOverrides();
+            override.setContentType("application/pdf");
+
+            GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest("gigzeaze", "248PDF.pdf");// Added an hour's worth of milliseconds to the current time.urlRequest.setExpiration(    new Date( System.currentTimeMillis() + 3600000 ) );urlRequest.setResponseHeaders( override );
+            AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
+            URL url = s3Client.generatePresignedUrl(urlRequest);
+
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toURI().toString())));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -200,7 +221,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
                 double price = Double.parseDouble(value);
                 date = date.replace("\"", "");
-                Ticket ticket = new Ticket(id, name, arena, date, price, time);
+                Ticket ticket = new Ticket(id, name, arena, date, price, time,"","");
 //                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'");
 //                Date d = format.parse(date);
 //                if(date.contains("")) {
@@ -230,7 +251,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://10.0.2.2//viewUsersTickets.php?id=" + id;
+            JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
         }
 
         @Override

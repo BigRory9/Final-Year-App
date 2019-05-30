@@ -8,11 +8,12 @@ public class Order {
     private String product_id;
     private String productQuantity;
 
-    public Order(){
+
+    public Order() {
 
     }
 
-    public Order( String productName, String quantity, String price,String product_id) {
+    public Order(String productName, String quantity, String price, String product_id) {
         ProductName = productName;
         Quantity = quantity;
         Price = price;
@@ -20,10 +21,10 @@ public class Order {
 
     }
 
-    public Order(String order_id,String product_id,String productQuantity){
-        this.order_id=order_id;
-        this.product_id=product_id;
-        this.productQuantity=productQuantity;
+    public Order(String order_id, String product_id, String productQuantity) {
+        this.order_id = order_id;
+        this.product_id = product_id;
+        this.productQuantity = productQuantity;
     }
 
     public String getOrder_id() {

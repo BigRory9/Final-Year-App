@@ -14,6 +14,9 @@
             android:id="@+id/nav_view_orders"
             android:title="View Your Orders" />
         <item
+            android:id="@+id/nav_view_map"
+            android:title="View Map" />
+        <item
             android:id="@+id/logout"
             android:title="Logout" />
     </group>

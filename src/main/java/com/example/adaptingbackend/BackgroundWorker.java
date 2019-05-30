@@ -35,10 +35,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         type= params[0];
         int i =0;
-        String login_url = "http://10.0.2.2/login.php";
-        String register_url = "http://10.0.2.2/register.php";
-        String order_url = "http://10.0.2.2/addOrder.php";
-        String tansaction_url = "http://10.0.2.2/paypage_orders/charge.php";
+        String login_url = "http://192.168.1.120/login.php";
+        String register_url = "http://192.168.1.120/register.php";
+        String order_url = "http://192.168.1.120/addOrder.php";
+        String tansaction_url = "http://192.168.1.120/paypage_orders/charge.php";
         if(type.equals("login")){
             try {
                 String email = params[1];
@@ -130,6 +130,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String id = params[1];
                 String amount = params[2];
                 String orderID = params[3];
+                String pin =params[4];
 
 //                User user = new User(username,email,password);
                 //in oncreate
@@ -141,7 +142,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(amount, "UTF-8") + "&" + URLEncoder.encode("order_id", "UTF-8") + "=" + URLEncoder.encode(orderID, "UTF-8");
+                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(amount, "UTF-8") + "&" + URLEncoder.encode("order_id", "UTF-8") + "=" + URLEncoder.encode(orderID, "UTF-8")+"&" +  URLEncoder.encode("pin", "UTF-8") + "=" + URLEncoder.encode(pin, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -166,6 +167,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         if(type.equals("SEND TOKEN")){
             try {
                 String token_id = params[1];
@@ -257,4 +259,6 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
+
 }

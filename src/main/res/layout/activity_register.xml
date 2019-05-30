@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/mat_login_bg"
     tools:context=".Register">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,6 +61,16 @@
                 android:textColorHint="#FFF"
                 android:paddingLeft="20dp"
                 android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/uploadPhoto"
+                android:text="Upload Photo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/loginBackground"
+                android:onClick="getPhotoFromGallery"
+                android:textColor="#FFF"  />
 
             <EditText
                 android:id="@+id/password"

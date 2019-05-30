@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/linear">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -70,13 +71,14 @@
                 android:id="@+id/openPDF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/date"
                 android:layout_alignBottom="@+id/price"
+                android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="25dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="0dp"
                 android:background="@color/colorPrimary"
-                android:onClick="downloadPDF"
+                android:onClick="popUp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Collect Order"

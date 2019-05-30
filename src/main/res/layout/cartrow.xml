@@ -43,11 +43,7 @@
                     android:textStyle="normal|bold"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:text="Description"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/desc"
-                    android:layout_height="36dp" />
+
 
             </LinearLayout>
 

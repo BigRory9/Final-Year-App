@@ -111,7 +111,13 @@ public class MainShop extends AppCompatActivity
                     Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, ViewTickets.class);
             startActivity(i);
-        } else if (id == R.id.logout) {
+        }
+        else if (id == R.id.nav_view_map) {
+            Toast.makeText(this, "Attempting to view the Map...",
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.logout) {
             Toast.makeText(this, "Logging out now  user "+email, Toast.LENGTH_LONG).show();
             SharedPrefManager.saveEmail("",this);
             SharedPrefManager.saveOrderID("",this);
@@ -328,7 +334,7 @@ public class MainShop extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://10.0.2.2/display_products.php";
+            JSON_URL = "http://192.168.1.120/display_products.php";
         }
 
         @Override
@@ -377,7 +383,7 @@ public class MainShop extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://10.0.2.2/getUsersid.php?email=" + email;
+            JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
         }
 
         @Override
