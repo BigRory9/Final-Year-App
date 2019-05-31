@@ -73,10 +73,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 		boolean found=false;
 
 		for(int i=0; i<ticketList.size();i++) {
-		    if(ticketList.get(i).getLatitude().equals("")){
-
-            }
-			else if(markers.size()==0){
+			if(markers.size()==0){
 				String markerName = ticketList.get(i).getName() + "   " + ticketList.get(i).getDate();
 				LatLng shop = new LatLng(Double.parseDouble(ticketList.get(i).getLatitude()), Double.parseDouble(ticketList.get(i).getLongitude()));
 				Marker marker = mMap.addMarker(new MarkerOptions().position(shop)
@@ -273,7 +270,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 		@Override
 		protected void onPreExecute() {
-			JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
+			JSON_URL = "http://147.252.148.154//viewUsersTickets.php?id=" + id;
 		}
 
 		@Override

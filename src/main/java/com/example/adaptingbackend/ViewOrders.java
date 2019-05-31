@@ -203,7 +203,7 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://192.168.1.120/getUsersOrders.php?id=" + id;
+            JSON_URL = "http://147.252.148.154/getUsersOrders.php?id=" + id;
         }
 
         @Override
@@ -292,7 +292,7 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://192.168.1.120/display_products.php";
+            JSON_URL = "http://147.252.148.154/display_products.php";
         }
 
         @Override

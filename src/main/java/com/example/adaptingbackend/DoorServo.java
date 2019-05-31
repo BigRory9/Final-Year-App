@@ -1,9 +1,5 @@
 package com.example.adaptingbackend;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,8 +7,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +21,7 @@ import java.util.UUID;
 import android.os.Handler;
 
 
-public class DoorServo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DoorServo extends AppCompatActivity {
     //98:D3:31:90:82:9A
     private final String DEVICE_ADDRESS = "00:14:03:05:59:BB"; //MAC Address of Bluetooth Module
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -55,16 +49,6 @@ public class DoorServo extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_door_servo);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                com.example.adaptingbackend.DoorServo.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(com.example.adaptingbackend.DoorServo.this);
-
 
         lock_state_btn = (Button) findViewById(R.id.lock_state_btn);
         bluetooth_connect_btn = (Button) findViewById(R.id.bluetooth_connect_btn);
@@ -271,10 +255,5 @@ public class DoorServo extends AppCompatActivity implements NavigationView.OnNav
     protected void onStart()
     {
         super.onStart();
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
     }
 }

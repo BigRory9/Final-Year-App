@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.adaptingbackend.Database.Database;
@@ -47,7 +48,7 @@ import java.util.Set;
 
 public class QrCode extends AppCompatActivity {
 
-
+    private ImageView imageView;
     String value = "Order Information\n";
     String orderID = "87", name;
 
@@ -62,13 +63,7 @@ public class QrCode extends AppCompatActivity {
         setContentView(R.layout.activity_qr_code);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
-
-
-
+        imageView = findViewById(R.id.imageView);
         List<Order> m_cart = new Database(this).getCarts();
 //        Set<Product> products = cart.getProducts();
         Iterator iterator = m_cart.iterator();
@@ -112,7 +107,7 @@ public class QrCode extends AppCompatActivity {
             BitMatrix bitMatrix = multiFormatWriter.encode(value, BarcodeFormat.QR_CODE, 500, 500);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-//            imageView.setImageBitmap(bitmap);
+            imageView.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -177,7 +172,7 @@ public class QrCode extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] objects) {
                 String pin =objects[0].toString();
-                Mail m = new Mail("gigzeaze@gmail.com", "Gigzeaze123!");
+                Mail m = new Mail("rjharford@gmail.com", "dadadada1");
 
                 String[] toArr = {"roryharford@live.ie"};
                 m.setTo(toArr);

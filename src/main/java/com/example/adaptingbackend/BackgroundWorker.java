@@ -35,10 +35,10 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         type= params[0];
         int i =0;
-        String login_url = "http://192.168.1.120/login.php";
-        String register_url = "http://192.168.1.120/register.php";
-        String order_url = "http://192.168.1.120/addOrder.php";
-        String tansaction_url = "http://192.168.1.120/paypage_orders/charge.php";
+        String login_url = "http://147.252.148.154/login.php";
+        String register_url = "http://147.252.148.154/register.php";
+        String order_url = "http://147.252.148.154/addOrder.php";
+        String tansaction_url = "http://147.252.148.154/paypage_orders/charge.php";
         if(type.equals("login")){
             try {
                 String email = params[1];

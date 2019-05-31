@@ -57,13 +57,9 @@ public class ViewCart extends AppCompatActivity {
       //set the views details to the products details
 
 
-//            imageview = (ImageView) findViewById(R.id.imageView);
-//            imageview.setImageResource(res);
 
-//
-      int res = getResources().getIdentifier(order.getProductName().toLowerCase(), "drawable", this.getPackageName());
-            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
-            imageView.setImageResource(res);
+//            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
+//            imageView.setImageResource(product.getImageName());
 
       TextView textView = (TextView) myview.findViewById(R.id.name);
       textView.setText(order.getProductName());
@@ -72,7 +68,7 @@ public class ViewCart extends AppCompatActivity {
       priceView.setText(order.getPrice());
 //
 //            TextView descView = (TextView) myview.findViewById(R.id.desc);
-//            descView.setText(order.getDescription());
+//            descView.setText(product.getDescription());
 //
       TextView quaView = (TextView) myview.findViewById(R.id.qty);
       quaView.setText(order.getQuantity());

@@ -167,9 +167,9 @@ public class CardActivity extends AppCompatActivity {
 
     @Override
     protected void onPreExecute() {
-//            JSON_URL = "http://10.0.2.2/createOrder.php/?email="+name;
+//            JSON_URL = "://10.0.2.2/createOrder.php/?email="+name;
 
-      JSON_URL = "http://192.168.1.120/createOrder.php?email="+email;
+      JSON_URL = "http://147.252.148.154/createOrder.php?email="+email;
     }
 
     @Override
