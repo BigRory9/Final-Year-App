@@ -55,7 +55,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId().equals(order.getProduct_id().get(j))) {
                     prodName = prodName + productList.get(i).get_name() + " x " + order.getProductQuantity().get(j) + "\n";
-                    price = (int) (price + productList.get(i).get_value());
+                    price = (int) (price + (productList.get(i).get_value()*Integer.parseInt(order.getProductQuantity().get(j))));
                 }
             }
 

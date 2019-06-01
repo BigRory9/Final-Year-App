@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.adaptingbackend.Database.Database;
@@ -35,10 +36,14 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         type= params[0];
         int i =0;
-        String login_url = "http://147.252.148.154/login.php";
-        String register_url = "http://147.252.148.154/register.php";
-        String order_url = "http://147.252.148.154/addOrder.php";
-        String tansaction_url = "http://147.252.148.154/paypage_orders/charge.php";
+//        String login_url = "http://147.252.148.154/login.php";
+//        String register_url = "http://147.252.148.154/register.php";
+//        String order_url = "http://147.252.148.154/addOrder.php";
+//        String tansaction_url = "http://147.252.148.154/paypage_orders/charge.php";
+        String login_url = "http://192.168.1.120/login.php";
+        String register_url = "http://192.168.1.120/register.php";
+        String order_url = "http://192.168.1.120/addOrder.php";
+        String tansaction_url = "http://192.168.1.120/paypage_orders/charge.php";
         if(type.equals("login")){
             try {
                 String email = params[1];
@@ -235,7 +240,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
         }
 
-        if(result.equals("login success") || result.equals("Insert Successful") ) {
+        if(result.equals("login success")   ) {
             alertDialog.cancel();
             Intent i = new Intent(context, MainShop.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -245,6 +250,26 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
 
         }
+        else if(result.equals("Insert Successful")){
+            alertDialog.cancel();
+            Intent i = new Intent(context, SelectPhoto.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        }
+        else
+        {
+            Log.d("CHECKER", result);
+            if(result.contains("'email'")) {
+                alertDialog.setMessage("This  Email has already been used to register an account");
+                alertDialog.show();
+            }else if(result.contains("username"))
+            {
+                alertDialog.setMessage("This username has already been taken");
+                alertDialog.show();
+            }
+        }
+
 
 //        else
 //        {

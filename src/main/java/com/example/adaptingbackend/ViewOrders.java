@@ -110,23 +110,34 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        int count = 0;
+        String email = SharedPrefManager.getEmail(this);
 
         if (id == R.id.nav_first_layout) {
-            Toast.makeText(this, "Purchase food and drinks",
-                    Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, MainShop.class);
-            startActivity(i);
-        } else if (id == R.id.nav_second_layout) {
             Toast.makeText(this, "Closing Drawer",
                     Toast.LENGTH_LONG).show();
             drawer.closeDrawers();
-        } else if (id == R.id.logout) {
-            String email = SharedPrefManager.getEmail(this);
-            Toast.makeText(this, "Logging out now  user " + email, Toast.LENGTH_LONG).show();
-            SharedPrefManager.saveEmail("", this);
-            SharedPrefManager.saveOrderID("", this);
-            SharedPrefManager.saveUserID("", this);
+        }
+        else if (id == R.id.nav_view_orders) {
+            Toast.makeText(this, "Attempting to view your Orders....",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, ViewOrders.class);
+            startActivity(i);
+        }else if (id == R.id.nav_second_layout) {
+            Toast.makeText(this, "Attempting to view your Tickets....",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, ViewTickets.class);
+            startActivity(i);
+        }
+        else if (id == R.id.nav_view_map) {
+            Toast.makeText(this, "Attempting to view the Map...",
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.logout) {
+            Toast.makeText(this, "Logging out now  user "+email, Toast.LENGTH_LONG).show();
+            SharedPrefManager.saveEmail("",this);
+            SharedPrefManager.saveOrderID("",this);
+            SharedPrefManager.saveUserID("",this);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
@@ -203,7 +214,8 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://147.252.148.154/getUsersOrders.php?id=" + id;
+//            JSON_URL = "http://147.252.148.154/getUsersOrders.php?id=" + id;
+            JSON_URL = "http://192.168.1.120/getUsersOrders.php?id=" + id;
         }
 
         @Override
@@ -292,7 +304,8 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://147.252.148.154/display_products.php";
+//            JSON_URL = "http://147.252.148.154/display_products.php";
+            JSON_URL = "http://192.168.1.120/display_products.php";
         }
 
         @Override

@@ -4,7 +4,6 @@ android {
     compileSdkVersion 26
 
 
-
     defaultConfig {
         applicationId "com.example.myapplication"
         multiDexEnabled true
@@ -51,7 +50,6 @@ android {
         checkReleaseBuilds false
     }
 }
-
 
 
 dependencies {

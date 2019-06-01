@@ -334,7 +334,8 @@ public class MainShop extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://147.252.148.154/display_products.php";
+//            JSON_URL = "http://147.252.148.154/display_products.php";
+            JSON_URL = "http://192.168.1.120/display_products.php";
         }
 
         @Override
@@ -383,7 +384,8 @@ public class MainShop extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
-            JSON_URL = "http://147.252.148.154/getUsersid.php?email=" + email;
+          //  JSON_URL = "http://147.252.148.154/getUsersid.php?email=" + email;#
+            JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
         }
 
         @Override
