@@ -23,13 +23,11 @@ import java.util.List;
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder> {
 
 
-    //this context we will use to inflate the layout
     private Context mCtx;
 
     private final String accessKey="AKIAJVL5I336SYABBB4A";
     private final String secretKey="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";
 
-    //we are storing all the tickets in a list
     private List<Ticket> ticketList;
 
     //getting the context and ticket list with constructor
@@ -73,10 +71,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
                 }
             }
         });
-//        holder.textViewPrice.setText(String.valueOf(ticket.getPrice()));
-
-//        holder.imageView.setImageDrawable(R.drawable.fypbrand);
-
     }
 
 
@@ -94,7 +88,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
         public TicketViewHolder(View itemView) {
             super(itemView);
-//
             concertName = itemView.findViewById(R.id.concertName);
             date = itemView.findViewById(R.id.date);
             price = itemView.findViewById(R.id.price);

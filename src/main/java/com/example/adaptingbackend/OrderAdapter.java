@@ -50,76 +50,64 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         final ReadOrdersFromDB order = orderList.get(position);
         String prodName = "";
         int price = 0;
+        if (!order.getCollected().equals("1")) {
 
-        for (int j = 0; j < orderList.get(position).getProduct_id().size(); j++) {
-            for (int i = 0; i < productList.size(); i++) {
-                if (productList.get(i).getId().equals(order.getProduct_id().get(j))) {
-                    prodName = prodName + productList.get(i).get_name() + " x " + order.getProductQuantity().get(j) + "\n";
-                    price = (int) (price + (productList.get(i).get_value()*Integer.parseInt(order.getProductQuantity().get(j))));
-                }
-            }
-
-
-        }
-        holder.productName.setText(prodName);
-//        holder.date.setText(order.getOrder_id());
-        holder.price.setText("€" + Integer.toString(price));
-
-        holder.collectItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.custom);
-                dialog.setTitle("Opening Box");
-
-
-                // set the custom dialog components - text, image and button
-//        TextView text = (TextView) dialog.findViewById(R.id.text);
-//        text.setText("Enter your pin sent via your email to collect");
-//        ImageView image = (ImageView) dialog.findViewById(R.id.image);
-//        image.setImageResource(R.drawable.burger);
-
-
-//
-                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                dialog.show();
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final EditText Edit1 = (EditText) dialog.findViewById(R.id.editTextone);
-                        final EditText Edit2 = (EditText) dialog.findViewById(R.id.editTexttwo);
-                        final EditText Edit3 = (EditText) dialog.findViewById(R.id.editTextthree);
-                        final EditText Edit4 = (EditText) dialog.findViewById(R.id.editTextfour);
-                        String pinEntered = Edit1.getText().toString() + Edit2.getText().toString() + Edit3.getText().toString() + Edit4.getText().toString();
-                        if (pinEntered.equals(order.getCode())) {
-                            Toast.makeText(v.getContext(), "CONGRADULATIONS User Entered " + pinEntered,
-                                    Toast.LENGTH_SHORT).show();
-
-                            dialog.getContext().startActivity(new Intent(dialog.getContext(), DoorServo.class));
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(v.getContext(), "ERROR User Entered code" + pinEntered,
-                                    Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-
+            for (int j = 0; j < orderList.get(position).getProduct_id().size(); j++) {
+                for (int i = 0; i < productList.size(); i++) {
+                    if (productList.get(i).getId().equals(order.getProduct_id().get(j))) {
+                        prodName = prodName + productList.get(i).get_name() + " x " + order.getProductQuantity().get(j) + "\n";
+                        price = (int) (price + (productList.get(i).get_value() * Integer.parseInt(order.getProductQuantity().get(j))));
                     }
-                });
+                }
+
 
             }
-        });
+            holder.productName.setText(prodName);
+            holder.price.setText("€" + Integer.toString(price));
+
+            holder.collectItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final Dialog dialog = new Dialog(v.getContext());
+                    dialog.setContentView(R.layout.custom);
+                    dialog.setTitle("Opening Box");
+
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    dialog.show();
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final EditText Edit1 = (EditText) dialog.findViewById(R.id.editTextone);
+                            final EditText Edit2 = (EditText) dialog.findViewById(R.id.editTexttwo);
+                            final EditText Edit3 = (EditText) dialog.findViewById(R.id.editTextthree);
+                            final EditText Edit4 = (EditText) dialog.findViewById(R.id.editTextfour);
+                            String pinEntered = Edit1.getText().toString() + Edit2.getText().toString() + Edit3.getText().toString() + Edit4.getText().toString();
+                            if (pinEntered.equals(order.getCode())) {
+                                String type = "collect";
+                                BackgroundWorker backgroundWorker = new BackgroundWorker(mCtx);
+                                backgroundWorker.execute(type, order.getOrder_id());
+
+                                Toast.makeText(v.getContext(), "CONGRADULATIONS User Entered " + pinEntered,
+                                        Toast.LENGTH_SHORT).show();
+
+                                dialog.getContext().startActivity(new Intent(dialog.getContext(), DoorServo.class));
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(v.getContext(), "ERROR User Entered code" + pinEntered,
+                                        Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+
+                        }
+                    });
+
+                }
+            });
+        }
 
 
     }
-//    }
-//        holder.collectItem.setOnClickListener(
-//
-//        );
-    // }
-//        holder.textViewPrice.setText(String.valueOf(ticket.getPrice()));
-
-//        holder.imageView.setImageDrawable(R.drawable.fypbrand);
 
 
     @Override
@@ -137,13 +125,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public OrderViewHolder(View itemView) {
             super(itemView);
-//
             productName = itemView.findViewById(R.id.productName);
             date = itemView.findViewById(R.id.product);
             price = itemView.findViewById(R.id.price);
             imageView = itemView.findViewById(R.id.imageView);
             collectItem = itemView.findViewById(R.id.openPDF);
-//            linearLayout = (LinearLayout) itemView.findViewById(R.id.linear);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.example.adaptingbackend.Order;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -110,6 +111,7 @@ public class Database extends SQLiteAssetHelper {
         }
         String Query = "Select * from OrderDetail where ProductName = '" + product_name + "' AND Quantity == 0;";
         Cursor cursor_1 = db.rawQuery(Query, null);
+        System.out.println(cursor_1.getCount());
         if (cursor_1.getColumnCount() > 0) {
             query = "DELETE FROM OrderDetail WHERE ProductName LIKE '" + product_name + "'";
             db.execSQL(query);

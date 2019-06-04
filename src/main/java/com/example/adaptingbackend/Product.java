@@ -1,12 +1,12 @@
 package com.example.adaptingbackend;
 
 public class Product {
-    String id;
-    String m_name;
-    double m_value;
-    int imageName;
-    String description;
-    boolean food;
+    private String id;
+    private String m_name;
+    private double m_value;
+    private int imageName;
+    private String description;
+    private boolean food;
 
     public boolean isFood() {
         return food;

@@ -9,12 +9,14 @@ public class ReadOrdersFromDB {
     private ArrayList<String>  product_id;
     private ArrayList<String>  productQuantity;
     private String code;
+    private String collected;
 
-    public ReadOrdersFromDB(String order_id,ArrayList<String>  product_id,ArrayList<String>  productQuantity,String code){
+    public ReadOrdersFromDB(String order_id,ArrayList<String>  product_id,ArrayList<String>  productQuantity,String code,String collected){
         this.order_id=order_id;
         this.product_id=product_id;
         this.productQuantity=productQuantity;
         this.code=code;
+        this.collected=collected;
     }
 
     public String getOrder_id() {
@@ -55,5 +57,13 @@ public class ReadOrdersFromDB {
 
     public void setProductQuantity(ArrayList<String> productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getCollected() {
+        return collected;
+    }
+
+    public void setCollected(String collected) {
+        this.collected = collected;
     }
 }

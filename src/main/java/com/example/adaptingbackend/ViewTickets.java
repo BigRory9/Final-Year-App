@@ -48,11 +48,11 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
     private final String accessKey = "AKIAJVL5I336SYABBB4A";
     private final String secretKey = "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";
-    LinearLayout mparent;
-    ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
-    LayoutInflater layoutInflater;
-    RecyclerView recyclerView;
-    String id;
+    private LinearLayout mparent;
+    private ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+    private LayoutInflater layoutInflater;
+    private RecyclerView recyclerView;
+    private String id;
     private DrawerLayout drawer;
 
 
@@ -112,20 +112,8 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //code to get the file
-                String str_FilePathInDevice = "/sdcard/" + "/"
-                        + "RestoreFolderName" + "/" + "filname.extention";
-                try {
-//                File file = new File(str_FilePathInDevice);
-                    //
-//
-//                String str_Path = file.getPath().replace(file.getName(), "");
-//                File filedir = new File(str_Path);
 
-//                try {
-//                    filedir.mkdirs();
-//                } catch (Exception ex1) {
-//                }
+                try {
                     AWSCredentials creden = new BasicAWSCredentials("AKIAI5BANVNXM3EHHWMQ",
                             "vVsj1Kd+iQ0LKyOgSuS5PVM8vJ00fdGMll1jCc6r");
                     AmazonS3Client s3Client = new AmazonS3Client(creden);
@@ -135,8 +123,6 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
                     BufferedReader reader = new BufferedReader(new InputStreamReader(
                             object.getObjectContent()));
                     Writer writer = null;
-
-//                writer = new OutputStreamWriter(new FileOutputStream(file));
 
 
                     while (true) {
@@ -160,20 +146,6 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
 
     }
 
-    public void getPDF(View view) {
-        try {
-            ResponseHeaderOverrides override = new ResponseHeaderOverrides();
-            override.setContentType("application/pdf");
-
-            GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest("gigzeaze", "248PDF.pdf");// Added an hour's worth of milliseconds to the current time.urlRequest.setExpiration(    new Date( System.currentTimeMillis() + 3600000 ) );urlRequest.setResponseHeaders( override );
-            AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
-            URL url = s3Client.generatePresignedUrl(urlRequest);
-
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toURI().toString())));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -181,9 +153,8 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
         String email = SharedPrefManager.getEmail(this);
 
         if (id == R.id.nav_first_layout) {
-            Toast.makeText(this, "Closing Drawer",
-                    Toast.LENGTH_LONG).show();
-            drawer.closeDrawers();
+            Intent i = new Intent(this, MainShop.class);
+            startActivity(i);
         }
         else if (id == R.id.nav_view_orders) {
             Toast.makeText(this, "Attempting to view your Orders....",
@@ -234,15 +205,7 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
                 double price = Double.parseDouble(value);
                 date = date.replace("\"", "");
                 Ticket ticket = new Ticket(id, name, arena, date, price, time,"","");
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'");
-//                Date d = format.parse(date);
-//                if(date.contains("")) {
                 ticketList.add(ticket);
-//                }
-//                else
-//                {
-//                    Log.d(null, "parseJSON: ");
-//                }
 
                 count++;
             }
@@ -259,12 +222,10 @@ public class ViewTickets extends AppCompatActivity implements NavigationView.OnN
         String JSON_URL;
         String JSON_STRING;
 
-//        ArrayList<Product> list = new ArrayList<Product>();
-
         @Override
         protected void onPreExecute() {
-           // JSON_URL = "http://147.252.148.154//viewUsersTickets.php?id=" + id;
-            JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
+           JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
+           // JSON_URL = "http://147.252.148.84//viewUsersTickets.php?id=" + id;
         }
 
         @Override

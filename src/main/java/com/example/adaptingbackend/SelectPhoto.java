@@ -1,7 +1,10 @@
 package com.example.adaptingbackend;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +26,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -31,7 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class SelectPhoto extends AppCompatActivity {
-    String picturePath,email,user_id;
+    private String picturePath, email, user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,8 @@ public class SelectPhoto extends AppCompatActivity {
 
 
     }
-    public void startUp(){
+
+    public void startUp() {
         setContentView(R.layout.activity_select_photo);
     }
 
@@ -50,14 +57,22 @@ public class SelectPhoto extends AppCompatActivity {
     public void getPhotoFromGallery(View view) {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPhoto, 0);//one can be replaced with any action code
+        startActivityForResult(pickPhoto, 0);
     }
 
-    public void confirmPhoto(View view){
-        new UploadImage().execute("Image Number "+user_id, picturePath);
-        Intent i = new Intent(this, MainShop.class);
-        startActivity(i);
+    public void confirmPhoto(View view) {
+        System.out.println(picturePath);
+        if (picturePath==null) {
+            Toast.makeText(this, "Must select a photo to complete registration",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            new UploadImage().execute("Image Number " + user_id, picturePath);
+            Intent i = new Intent(this, MainShop.class);
+            startActivity(i);
+        }
+
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         ImageView imageview = findViewById(R.id.imageView);
         TextView textView = findViewById(R.id.textView);
@@ -68,13 +83,21 @@ public class SelectPhoto extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
 
                     Uri selectedImage = imageReturnedIntent.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, 800, 800, true);
+                        selectedImage = this.getImageUri(this, resized);
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     imageview.setImageURI(selectedImage);
-//                    textView.setText("");
-//                    textView1.setText("");
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
                     Cursor cursor = getContentResolver().query(selectedImage,
                             filePathColumn, null, null, null);
-                    // Move to first row
 
                     cursor.moveToFirst();
 
@@ -82,10 +105,6 @@ public class SelectPhoto extends AppCompatActivity {
 
                     picturePath = cursor.getString(columnIndex);
                     File f = new File(picturePath);
-//                    String new_path = getPath(selectedImage);
-//
-//                    String imageName = f.getName();
-
                 }
             case 1:
                 break;
@@ -104,28 +123,55 @@ public class SelectPhoto extends AppCompatActivity {
 
     public ArrayList<Product> parseJSON(String JSON_STRING) {
 
-            try {
-                JSONObject jsonObject = new JSONObject(JSON_STRING);
-                JSONArray jsonArray = jsonObject.getJSONArray("server_response");
-                int count = 0;
-                boolean type = true;
-                while (count < jsonArray.length()) {
-                    JSONObject JO = jsonArray.getJSONObject(count);
-                    user_id = JO.getString("id");
-                    Toast.makeText(this, "Your ID " + user_id,
-                            Toast.LENGTH_SHORT).show();
-
-                    //
-                    count++;
-                }
-                     startUp();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
+        try {
+            JSONObject jsonObject = new JSONObject(JSON_STRING);
+            JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+            int count = 0;
+            boolean type = true;
+            while (count < jsonArray.length()) {
+                JSONObject JO = jsonArray.getJSONObject(count);
+                user_id = JO.getString("id");
+                Toast.makeText(this, "Your ID " + user_id,
+                        Toast.LENGTH_SHORT).show();
+                count++;
             }
+            startUp();
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         return null;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public static Bitmap decodeUri(Context c, Uri uri, final int requiredSize)
+            throws FileNotFoundException {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(c.getContentResolver().openInputStream(uri), null, o);
+
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+
+        while (true) {
+            if (width_tmp / 2 < requiredSize || height_tmp / 2 < requiredSize)
+                break;
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(c.getContentResolver().openInputStream(uri), null, o2);
     }
 
     public class JSONgetUserId extends AsyncTask<String, Void, String> {
@@ -133,12 +179,11 @@ public class SelectPhoto extends AppCompatActivity {
         String JSON_STRING;
         JSONObject jsonObject;
         JSONArray jsonArray;
-//        ArrayList<Product> list = new ArrayList<Product>();
 
         @Override
         protected void onPreExecute() {
-//            JSON_URL = "http://147.252.148.154/getUsersid.php?email=" + email;
-            JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
+           JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
+//            JSON_URL = "http://147.252.148.84/getUsersid.php?email=" + email;
         }
 
         @Override

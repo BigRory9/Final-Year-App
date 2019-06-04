@@ -8,10 +8,10 @@ import static com.example.adaptingbackend.MainShop.mCartItemCount;
 
 public class Cart {
 
-    Map<Product, Integer> m_cart;
-    double m_value =0;
+    private Map<Product, Integer> m_cart;
+    private double m_value =0;
 
-    Cart(){
+    private Cart(){
         m_cart= new LinkedHashMap<>();
     }
 

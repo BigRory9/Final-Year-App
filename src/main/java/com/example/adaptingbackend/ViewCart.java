@@ -24,8 +24,8 @@ import static com.example.adaptingbackend.MainShop.mCartItemCount;
 
 
 public class ViewCart extends AppCompatActivity {
-  LinearLayout mparent;
-  LayoutInflater layoutInflater;
+  private LinearLayout mparent;
+  private LayoutInflater layoutInflater;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class ViewCart extends AppCompatActivity {
     }
     mparent = findViewById(R.id.mparent);
     layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//        Set<Product> products = cart.getProducts();
 
     TextView welcome = (TextView) findViewById(R.id.welcome);
     SharedPrefManager.getEmail(this);
@@ -54,29 +53,25 @@ public class ViewCart extends AppCompatActivity {
       Order order = (Order) iterator.next();
       View myview = layoutInflater.inflate(R.layout.cartrow, null, false);
       mparent.addView(myview);
-      //set the views details to the products details
 
-
-
-//            ImageView imageView = (ImageView) myview.findViewById(R.id.image);
-//            imageView.setImageResource(product.getImageName());
+      int res = getResources().getIdentifier(order.getProductName().toLowerCase(), "drawable", this.getPackageName());
+      ImageView imageView = (ImageView) myview.findViewById(R.id.image);
+      imageView.setImageResource(res);
 
       TextView textView = (TextView) myview.findViewById(R.id.name);
       textView.setText(order.getProductName());
-//
+
       TextView priceView = (TextView) myview.findViewById(R.id.price);
       priceView.setText(order.getPrice());
-//
-//            TextView descView = (TextView) myview.findViewById(R.id.desc);
-//            descView.setText(product.getDescription());
-//
+
+
       TextView quaView = (TextView) myview.findViewById(R.id.qty);
       quaView.setText(order.getQuantity());
-////
+
       TextView valueView = (TextView) findViewById(R.id.response);
       String price = new Database(this).getPrice();
       valueView.setText("Total Cart Value = € "+price);
-//
+
       Button btn = (Button) myview.findViewById(R.id.btnRemove);
       ImageButton btnAdd = (ImageButton) myview.findViewById(R.id.btnAdd);
       ImageButton btnRemove = (ImageButton) myview.findViewById(R.id.btnRemoveOne);

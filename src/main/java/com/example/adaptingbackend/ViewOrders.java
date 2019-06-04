@@ -103,8 +103,6 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
     public void startUp() {
          OrderAdapter adapter = new OrderAdapter(this, orderList, products);
-        System.out.print("HELLO");
-        //setting adapter to recyclerview
          recyclerView.setAdapter(adapter);
     }
 
@@ -113,9 +111,8 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
         String email = SharedPrefManager.getEmail(this);
 
         if (id == R.id.nav_first_layout) {
-            Toast.makeText(this, "Closing Drawer",
-                    Toast.LENGTH_LONG).show();
-            drawer.closeDrawers();
+            Intent i = new Intent(this, MainShop.class);
+            startActivity(i);
         }
         else if (id == R.id.nav_view_orders) {
             Toast.makeText(this, "Attempting to view your Orders....",
@@ -154,7 +151,7 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
             JSONObject jsonObject = new JSONObject(JSON_STRING);
             JSONArray jsonArray = jsonObject.getJSONArray("server_response");
             int count = 0;
-            String id, product_id, productQuantity, code;
+            String id, product_id, productQuantity, code,collected;
             boolean type = true;
             while (count < jsonArray.length()) {
                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -165,10 +162,13 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
 
                 code= JO.getString("code");
 
+                collected = JO.getString("collected");
+
                 ArrayList<String> prod = new ArrayList<String>();
 
                 ArrayList<String> quantity = new ArrayList<String>();
-                ReadOrdersFromDB order = new ReadOrdersFromDB(id, prod, quantity,code);
+
+                ReadOrdersFromDB order = new ReadOrdersFromDB(id, prod, quantity,code,collected);
                 boolean found = false;
                 int num = 0;
                 for (int i = 0; i < orderList.size(); i++) {
@@ -178,27 +178,29 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
                         break;
                     }
                 }
-                if (orderList.size() == 0) {
-                    prod.add(product_id);
-                    quantity.add(productQuantity);
-                    orderList.add(order);
-                } else if (found == true) {
-                    orderList.get(num).getProduct_id().add(product_id);
-                    orderList.get(num).getProductQuantity().add(productQuantity);
-                    found = false;
-                } else {
-                    prod.add(product_id);
-                    quantity.add(productQuantity);
-                    orderList.add(order);
+                if(collected.equals("0")) {
+                    if (orderList.size() == 0) {
+                        prod.add(product_id);
+                        quantity.add(productQuantity);
+                        orderList.add(order);
+                    } else if (found == true) {
+                        orderList.get(num).getProduct_id().add(product_id);
+                        orderList.get(num).getProductQuantity().add(productQuantity);
+                        found = false;
+                    } else {
+                        prod.add(product_id);
+                        quantity.add(productQuantity);
+                        orderList.add(order);
+                    }
+                }
+                else{
+                    System.out.println("ALREADY COLLECTED");
                 }
 
 
                 count++;
             }
-
-
             startUp();
-//                return ticketList;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -210,12 +212,11 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
         String JSON_URL;
         String JSON_STRING;
 
-//        ArrayList<Product> list = new ArrayList<Product>();
 
         @Override
         protected void onPreExecute() {
-//            JSON_URL = "http://147.252.148.154/getUsersOrders.php?id=" + id;
-            JSON_URL = "http://192.168.1.120/getUsersOrders.php?id=" + id;
+           JSON_URL = "http://192.168.1.120/getUsersOrders.php?id=" + id;
+//            JSON_URL = "http://147.252.148.84/getUsersOrders.php?id=" + id;
         }
 
         @Override
@@ -300,12 +301,11 @@ public class ViewOrders extends AppCompatActivity implements NavigationView.OnNa
         String JSON_STRING;
         JSONObject jsonObject;
         JSONArray jsonArray;
-//        ArrayList<Product> list = new ArrayList<Product>();
 
         @Override
         protected void onPreExecute() {
-//            JSON_URL = "http://147.252.148.154/display_products.php";
-            JSON_URL = "http://192.168.1.120/display_products.php";
+           JSON_URL = "http://192.168.1.120/display_products.php";
+//            JSON_URL = "http://147.252.148.84/display_products.php";
         }
 
         @Override

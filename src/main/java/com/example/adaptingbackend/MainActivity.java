@@ -13,7 +13,7 @@ import com.example.adaptingbackend.Database.Database;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText UsernameEt, PasswordEt;
+    private EditText UsernameEt, PasswordEt;
 
 
     @Override

@@ -2,7 +2,7 @@ package com.example.adaptingbackend;
 
 public class User {
 
-    String name, email, password;
+    private String name, email, password;
 
     public User(String name, String email, String password) {
         this.name = name;

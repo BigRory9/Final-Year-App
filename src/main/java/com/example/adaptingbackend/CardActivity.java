@@ -30,11 +30,11 @@ import java.net.URL;
 
 
 public class CardActivity extends AppCompatActivity {
-  String name;
-  int orderID;
-  int userID;
-  String email;
-  String value = "";
+  private String name;
+  private int orderID;
+  private int userID;
+  private String email;
+  private String value = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public class CardActivity extends AppCompatActivity {
   }
 
   public void start() {
-    //email =SharedPrefManager.getEmail(this);
     Toast toast = Toast.makeText(getApplicationContext(),"Users Email = "+
             SharedPrefManager.getEmail(this), Toast.LENGTH_SHORT);
     toast.show();
@@ -109,7 +108,6 @@ public class CardActivity extends AppCompatActivity {
           Toast.makeText(getApplicationContext(), "Succesfully created a token", Toast.LENGTH_LONG).show();       // < this toast works, so my token is fine
 
           BackgroundWorker databaseTask = new BackgroundWorker(getApplicationContext());
-          //does this need to be what they purchsed
           databaseTask.execute("SEND TOKEN", token.getId(), String.valueOf(orderID),"drinks/food",String.valueOf(userID));
           SharedPrefManager.saveOrderID(String.valueOf(orderID), getApplicationContext());
 
@@ -124,8 +122,6 @@ public class CardActivity extends AppCompatActivity {
   }
 
   public void parseJSON(String JSON_STRING) {
-    //  Toast.makeText(getApplicationContext(), "Displaying Json " + JSON_STRING, Toast.LENGTH_SHORT).show();
-
     try {
 
       JSONObject jsonObject = new JSONObject(JSON_STRING);
@@ -135,7 +131,6 @@ public class CardActivity extends AppCompatActivity {
       String user_id;
       String food;
       boolean type = true;
-      // Toast.makeText(getApplicationContext(), "Displaying Json " + jsonArray.length(), Toast.LENGTH_SHORT).show();
       while (count < jsonArray.length()) {
         JSONObject JO = jsonArray.getJSONObject(count);
 
@@ -158,7 +153,6 @@ public class CardActivity extends AppCompatActivity {
     } catch (JSONException e) {
       e.printStackTrace();
     }
-//        Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast " + orderID, Toast.LENGTH_SHORT).show();
   }
 
   public class JSONBackgroundWorker extends AsyncTask<Void, Void, String> {
@@ -169,8 +163,8 @@ public class CardActivity extends AppCompatActivity {
     protected void onPreExecute() {
 //            JSON_URL = "://10.0.2.2/createOrder.php/?email="+name;
 
-//      JSON_URL = "http://147.252.148.154/createOrder.php?email="+email;
-      JSON_URL = "http://192.168.1.120/createOrder.php?email="+email;
+     JSON_URL = "http://192.168.1.120/createOrder.php?email="+email;
+//      JSON_URL = "http://147.252.148.84/createOrder.php?email="+email;
     }
 
     @Override
@@ -204,7 +198,6 @@ public class CardActivity extends AppCompatActivity {
 
     @Override
     protected void onPostExecute(String result) {
-//            Toast.makeText(getApplicationContext(), "This is a message displayed in a Toast" + result, Toast.LENGTH_SHORT).show();
       parseJSON(result);
 
     }

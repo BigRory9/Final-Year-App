@@ -38,24 +38,24 @@ import java.util.List;
 public class MainShop extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    LinearLayout mparent, sparent;
-    TextView m_response;
-    String email, user_id;
+    private LinearLayout mparent, sparent;
+    private TextView m_response;
+    private String email, user_id;
     private DrawerLayout drawer;
 
-    TextView textCartItemCount;
+    private TextView textCartItemCount;
     public static int mCartItemCount = 0;
 
 
-    LayoutInflater layoutInflater;
+    private LayoutInflater layoutInflater;
 
-    int i = 0;
+    private int i = 0;
 
-    JSONObject jsonObject;
-    JSONArray jsonArray;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
-    ArrayList<Product> drinkList = new ArrayList<Product>();
-    ArrayList<Product> foodList = new ArrayList<Product>();
+    private ArrayList<Product> drinkList = new ArrayList<Product>();
+    private ArrayList<Product> foodList = new ArrayList<Product>();
 
 
     @Override
@@ -64,12 +64,6 @@ public class MainShop extends AppCompatActivity
         setContentView(R.layout.activity_shop);
 
         email = SharedPrefManager.getEmail(this);
-//        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-//        backgroundWorker.execute("getUserId", email);
-//
-//        m_cart = new Cart();
-//        m_response = (TextView) findViewById(R.id.response);
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,28 +94,26 @@ public class MainShop extends AppCompatActivity
             Toast.makeText(this, "Closing Drawer",
                     Toast.LENGTH_LONG).show();
             drawer.closeDrawers();
-        }
-        else if (id == R.id.nav_view_orders) {
+        } else if (id == R.id.nav_view_orders) {
             Toast.makeText(this, "Attempting to view your Orders....",
                     Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, ViewOrders.class);
             startActivity(i);
-        }else if (id == R.id.nav_second_layout) {
+        } else if (id == R.id.nav_second_layout) {
             Toast.makeText(this, "Attempting to view your Tickets....",
                     Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, ViewTickets.class);
             startActivity(i);
-        }
-        else if (id == R.id.nav_view_map) {
+        } else if (id == R.id.nav_view_map) {
             Toast.makeText(this, "Attempting to view the Map...",
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
-        }else if (id == R.id.logout) {
-            Toast.makeText(this, "Logging out now  user "+email, Toast.LENGTH_LONG).show();
-            SharedPrefManager.saveEmail("",this);
-            SharedPrefManager.saveOrderID("",this);
-            SharedPrefManager.saveUserID("",this);
+        } else if (id == R.id.logout) {
+            Toast.makeText(this, "Logging out now  user " + email, Toast.LENGTH_LONG).show();
+            SharedPrefManager.saveEmail("", this);
+            SharedPrefManager.saveOrderID("", this);
+            SharedPrefManager.saveUserID("", this);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
@@ -190,14 +182,14 @@ public class MainShop extends AppCompatActivity
     public void addProduct(View v) {
         ImageButton button = v.findViewById(R.id.button);
         Product product = (Product) button.getTag();
+        Toast.makeText(this, "You have added "+product.get_name()+" to your basket",
+                Toast.LENGTH_LONG).show();
 
         new Database(this).addToCart(new Order(product.get_name()
                 , "1", String.valueOf(product.get_value()), product.getId()));
         i++;
         mCartItemCount = mCartItemCount + 1;
         setupBadge();
-
-//        m_response.setText("Total cart value = $"+m_cart.getValue());
 
     }
 
@@ -225,10 +217,6 @@ public class MainShop extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         switch (item.getItemId()) {
 
             case R.id.action_cart: {
@@ -312,10 +300,9 @@ public class MainShop extends AppCompatActivity
                     Toast.makeText(this, "Your ID " + user_id,
                             Toast.LENGTH_SHORT).show();
 
-                    //
+
                     count++;
                 }
-                //     startUp();
                 return null;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -330,12 +317,11 @@ public class MainShop extends AppCompatActivity
         String JSON_STRING;
         JSONObject jsonObject;
         JSONArray jsonArray;
-//        ArrayList<Product> list = new ArrayList<Product>();
 
         @Override
         protected void onPreExecute() {
-//            JSON_URL = "http://147.252.148.154/display_products.php";
             JSON_URL = "http://192.168.1.120/display_products.php";
+//            JSON_URL = "http://147.252.148.84/display_products.php";
         }
 
         @Override
@@ -380,12 +366,11 @@ public class MainShop extends AppCompatActivity
         String JSON_STRING;
         JSONObject jsonObject;
         JSONArray jsonArray;
-//        ArrayList<Product> list = new ArrayList<Product>();
 
         @Override
         protected void onPreExecute() {
-          //  JSON_URL = "http://147.252.148.154/getUsersid.php?email=" + email;#
-            JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
+              JSON_URL = "http://192.168.1.120/getUsersid.php?email=" + email;
+            //JSON_URL = "http://147.252.148.84/getUsersid.php?email=" + email;
         }
 
         @Override
@@ -425,4 +410,3 @@ public class MainShop extends AppCompatActivity
         }
     }
 }
-//JSONgetUserId()

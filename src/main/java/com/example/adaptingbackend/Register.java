@@ -16,7 +16,7 @@ import com.example.adaptingbackend.R;
 import java.io.File;
 
 public class Register extends AppCompatActivity {
-    EditText username, email, password;
+    private EditText username, email, password;
 
 
     @Override
@@ -44,7 +44,6 @@ public class Register extends AppCompatActivity {
             if (android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
                 BackgroundWorker backgroundWorker = new BackgroundWorker(this);
                 try {
-//                    String encrptPassword = AESCrypt.encrypt(str_password);
                     String pass = BCrypt.hashpw(str_password, BCrypt.gensalt());
                     backgroundWorker.execute(type, str_username, str_email, pass);
                 } catch (Exception e) {
@@ -60,7 +59,7 @@ public class Register extends AppCompatActivity {
              toast = Toast.makeText(getApplicationContext(), "No Entry Can Be Empty ", Toast.LENGTH_SHORT);
             toast.show();
         }
-//        new UploadImage().execute("dsouihagihbiDSOBFDPIBAOFDUAIUVSNDAOU", picturePath);
+
 
     }
 

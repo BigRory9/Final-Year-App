@@ -1,5 +1,8 @@
 package com.example.adaptingbackend;
 
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -7,6 +10,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +26,7 @@ import java.util.UUID;
 import android.os.Handler;
 
 
-public class DoorServo extends AppCompatActivity {
+public class DoorServo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //98:D3:31:90:82:9A
     private final String DEVICE_ADDRESS = "00:14:03:05:59:BB"; //MAC Address of Bluetooth Module
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -31,6 +36,7 @@ public class DoorServo extends AppCompatActivity {
 
     private OutputStream outputStream;
     private InputStream inputStream;
+    private DrawerLayout drawer;
 
     Thread thread;
     byte buffer[];
@@ -49,6 +55,16 @@ public class DoorServo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_door_servo);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                com.example.adaptingbackend.DoorServo.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(com.example.adaptingbackend.DoorServo.this);
 
         lock_state_btn = (Button) findViewById(R.id.lock_state_btn);
         bluetooth_connect_btn = (Button) findViewById(R.id.bluetooth_connect_btn);
@@ -137,13 +153,14 @@ public class DoorServo extends AppCompatActivity {
                                 {
                                     if(string.equals("3"))
                                     {
-                                        lock_state_text.setText("Lock State: LOCKED"); // Changes the lock state text
-                                        lock_state_img.setImageResource(R.drawable.locked_icon); //Changes the lock state icon
+                                        lock_state_text.setText("Lock State: UNLOCKED");
+                                        lock_state_img.setImageResource(R.drawable.unlocked_icon);
+
                                     }
                                     else if(string.equals("4"))
                                     {
-                                        lock_state_text.setText("Lock State: UNLOCKED");
-                                        lock_state_img.setImageResource(R.drawable.unlocked_icon);
+                                        lock_state_text.setText("Lock State: LOCKED");
+                                        lock_state_img.setImageResource(R.drawable.locked_icon);
                                     }
                                 }
                             });
@@ -251,9 +268,51 @@ public class DoorServo extends AppCompatActivity {
         return connected;
     }
 
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_first_layout) {
+            Intent i = new Intent(this, MainShop.class);
+            startActivity(i);
+        }
+        else if (id == R.id.nav_view_orders) {
+            Toast.makeText(this, "Attempting to view your Orders....",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, ViewOrders.class);
+            startActivity(i);
+        }else if (id == R.id.nav_second_layout) {
+            Toast.makeText(this, "Attempting to view your Tickets....",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, ViewTickets.class);
+            startActivity(i);
+        }
+        else if (id == R.id.nav_view_map) {
+            Toast.makeText(this, "Attempting to view the Map...",
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.logout) {
+            String email =SharedPrefManager.getEmail(this);
+            Toast.makeText(this, "Logging out now  user "+email, Toast.LENGTH_LONG).show();
+            SharedPrefManager.saveEmail("",this);
+            SharedPrefManager.saveOrderID("",this);
+            SharedPrefManager.saveUserID("",this);
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+
+
+        return false;
+    }
+
     @Override
     protected void onStart()
     {
         super.onStart();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

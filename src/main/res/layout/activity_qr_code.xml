@@ -4,7 +4,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-android:background="@drawable/mat_login_bg"
+android:background="@color/pink"
 tools:context=".QrCode">
 
 <LinearLayout
@@ -43,28 +43,19 @@ tools:context=".QrCode">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bring this QR code to the shop to collect your order"
+            android:text="Your order has been complete and is ready for collection REMEMBER you will need your code emailed to you"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginTop="25dp"
+            android:background="@drawable/iconic" />
 
-        <Button
-            android:id="@+id/btnMap"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/loginBackground"
-            android:text="View Location of shop"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
 
         <Button
             android:id="@+id/homepagebtn"

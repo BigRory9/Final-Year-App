@@ -45,14 +45,14 @@ import java.util.ListIterator;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-	ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
-	String id;
+	private ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+	private String id;
 	@Override
 	public void onMapReady(GoogleMap googleMap) {
 		Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
 		Log.d(TAG, "onMapReady: map is ready");
 		mMap = googleMap;
-
+        id = SharedPrefManager.getUserID(this);
 		new MapActivity.JSONBackgroundWorker().execute();
 	}
 
@@ -73,6 +73,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 		boolean found=false;
 
 		for(int i=0; i<ticketList.size();i++) {
+			found=false;
 		    if(ticketList.get(i).getLatitude().equals("")){
 
             }
@@ -81,7 +82,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 				LatLng shop = new LatLng(Double.parseDouble(ticketList.get(i).getLatitude()), Double.parseDouble(ticketList.get(i).getLongitude()));
 				Marker marker = mMap.addMarker(new MarkerOptions().position(shop)
 						.title(markerName));
-				//CHange this to users location
 				mMap.moveCamera(CameraUpdateFactory.newLatLng(shop));
 				markers.add(marker);
 			}
@@ -101,7 +101,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 					LatLng shop = new LatLng(Double.parseDouble(ticketList.get(i).getLatitude()), Double.parseDouble(ticketList.get(i).getLongitude()));
 					Marker marker = mMap.addMarker(new MarkerOptions().position(shop)
 							.title(markerName));
-					//CHange this to users location
 					mMap.moveCamera(CameraUpdateFactory.newLatLng(shop));
 					markers.add(marker);
 				}
@@ -215,7 +214,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 					}
 					Log.d(TAG, "onRequestPermissionsResult: permission granted");
 					mLocationPermissionsGranted = true;
-					//initialize our map
 					initMap();
 				}
 			}
@@ -244,15 +242,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 				double price = Double.parseDouble(value);
 				date = date.replace("\"", "");
 				Ticket ticket = new Ticket(id, name, arena, date, price, time,longitude,latitude);
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'");
-//                Date d = format.parse(date);
-//                if(date.contains("")) {
 				ticketList.add(ticket);
-//                }
-//                else
-//                {
-//                    Log.d(null, "parseJSON: ");
-//                }
+
 
 				count++;
 			}
@@ -269,12 +260,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 		String JSON_URL;
 		String JSON_STRING;
 
-//        ArrayList<Product> list = new ArrayList<Product>();
 
 		@Override
 		protected void onPreExecute() {
-//			JSON_URL = "http://147.252.148.154//viewUsersTickets.php?id=" + id;
-            JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
+			JSON_URL = "http://192.168.1.120//viewUsersTickets.php?id=" + id;
+//            JSON_URL = "http://147.252.148.84//viewUsersTickets.php?id=" + id;
 		}
 
 		@Override

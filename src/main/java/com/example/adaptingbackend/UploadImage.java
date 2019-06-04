@@ -19,7 +19,6 @@ public class UploadImage extends AsyncTask<String, String, String> {
         String fileName = params[0];
         String filePath = params[1];
         AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
-//        s3Client.setRegion(Region.getRegion(Regions.EU_CENTRAL_1));
         PutObjectRequest por = new PutObjectRequest(bucketName, fileName, new File(filePath));
         s3Client.putObject(por);
         return "";

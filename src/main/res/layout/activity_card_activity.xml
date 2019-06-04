@@ -14,6 +14,7 @@
 
     <com.craftman.cardform.CardForm
         android:id="@+id/cardform"
+        android:paddingTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
